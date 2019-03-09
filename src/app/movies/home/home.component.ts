@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
   error;
   showError = false;
   movieTable: MovieTable[] = [];
-  movieCount: number;
+  moviesPerPage = 5;
+  pageSelected = 1;
 
   constructor(
     private movies: MovieService,
@@ -21,10 +22,9 @@ export class HomeComponent implements OnInit {
   ) {
     movies.getMovies().subscribe(
       data => {
-        this.loading = false;
         movieDetail.getMovies(data);
         this.movieTable = movieDetail.getMoviesTable();
-        this.movieCount = this.movieDetail.getMoviesCount();
+        this.loading = false;
       },
       error => {
         this.error = error;
@@ -36,5 +36,24 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+  }
+
+  get displayMovies() {
+    const pageIndex = (this.pageSelected - 1) * this.moviesPerPage;
+    return this.movieTable.slice(pageIndex, pageIndex + this.moviesPerPage);
+  }
+
+  get pageNumbers(): number[] {
+    return Array(Math.ceil(this.movieTable.length / this.moviesPerPage))
+      .fill(0)
+      .map((x, i) => i + 1);
+  }
+
+  changePage(newPage: number) {
+    this.pageSelected = newPage;
+  }
+
+  selectedMovie(movie: string) {
+    // console.log(movie);
   }
 }

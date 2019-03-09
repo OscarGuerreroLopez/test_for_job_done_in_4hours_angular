@@ -46,8 +46,4 @@ export class MovieDetailService {
   getMoviesTable() {
     return this.movieArray;
   }
-
-  getMoviesCount(): number {
-    return this.movieCount;
-  }
 }

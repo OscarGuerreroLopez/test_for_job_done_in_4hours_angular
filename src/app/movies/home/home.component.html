@@ -27,11 +27,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let movie of movieTable">
-        <th scope="row">{{ movie.title }}</th>
+      <tr *ngFor="let movie of displayMovies">
+        <th scope="row" (click)="selectedMovie(movie.title)">
+          {{ movie.title }}
+        </th>
         <td>{{ movie.director }}</td>
         <td>{{ movie.release_date | customDate }}</td>
       </tr>
     </tbody>
   </table>
+  <div class="btn-group float-right">
+    <button
+      *ngFor="let page of pageNumbers"
+      (click)="changePage(page)"
+      class="btn btn-outline-primary"
+      [class.active]="page == selectedPage"
+    >
+      {{ page }}
+    </button>
+  </div>
 </div>
