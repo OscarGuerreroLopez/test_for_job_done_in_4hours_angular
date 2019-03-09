@@ -17,6 +17,19 @@
 </div>
 
 <div *ngIf="!loading && !showError" class="container-fluid text-center">
+  <div class="container text-center">
+    <form>
+      <div class="form-group">
+        <label for="movie">Search for a movie</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchMovie"
+          name="movie"
+        />
+      </div>
+    </form>
+  </div>
   <p>Click on the title to get more details</p>
 
   <table class="table">
@@ -28,8 +41,11 @@
       </tr>
     </thead>
     <tbody>
+      <!-- <tr
+        *ngFor="let movie of (displayMovies | searchByName: searchMovie)"
+      ></tr> -->
       <tr *ngFor="let movie of displayMovies">
-        <th scope="row" (click)="selectedMovie(movie.title)">
+        <th scope="row">
           <a routerLink="/movies/details/{{ movie.title }}">{{
             movie.title
           }}</a>

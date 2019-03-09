@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   movieTable: MovieTable[] = [];
   moviesPerPage = 5;
   pageSelected = 1;
+  searchMovie: string;
+  movieTableSearch: MovieTable[] = [];
 
   constructor(
     private movies: MovieService,
@@ -39,11 +41,31 @@ export class HomeComponent implements OnInit {
   }
 
   get displayMovies() {
+    let count = 0;
     const pageIndex = (this.pageSelected - 1) * this.moviesPerPage;
+    this.movieTableSearch = [];
+    if (this.searchMovie) {
+      count = this.searchMovie.length;
+      this.movieTable.map(movie => {
+        if (movie.title.substring(0, count) === this.searchMovie) {
+          this.movieTableSearch.push(movie);
+        }
+      });
+      return this.movieTableSearch.slice(
+        pageIndex,
+        pageIndex + this.moviesPerPage
+      );
+    }
+
     return this.movieTable.slice(pageIndex, pageIndex + this.moviesPerPage);
   }
 
   get pageNumbers(): number[] {
+    if (this.searchMovie) {
+      return Array(Math.ceil(this.movieTableSearch.length / this.moviesPerPage))
+        .fill(0)
+        .map((x, i) => i + 1);
+    }
     return Array(Math.ceil(this.movieTable.length / this.moviesPerPage))
       .fill(0)
       .map((x, i) => i + 1);
@@ -51,9 +73,5 @@ export class HomeComponent implements OnInit {
 
   changePage(newPage: number) {
     this.pageSelected = newPage;
-  }
-
-  selectedMovie(movie: string) {
-    // console.log(movie);
   }
 }
