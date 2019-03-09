@@ -3,7 +3,7 @@
 </div>
 
 <div class="container-fluid">
-  <div class="text-center">
+  <div class="jumbotron text-center">
     <h1>Movies</h1>
   </div>
 </div>
@@ -17,10 +17,12 @@
 </div>
 
 <div *ngIf="!loading && !showError" class="container-fluid text-center">
-  <div class="container text-center">
+  <div *ngIf="showSearch" class="container text-center">
     <form>
       <div class="form-group">
-        <label for="movie">Search for a movie</label>
+        <label for="movie"
+          ><b>Search for a movie (not case sensitive don't worry):</b></label
+        >
         <input
           type="text"
           class="form-control"
@@ -41,9 +43,6 @@
       </tr>
     </thead>
     <tbody>
-      <!-- <tr
-        *ngFor="let movie of (displayMovies | searchByName: searchMovie)"
-      ></tr> -->
       <tr *ngFor="let movie of displayMovies">
         <th scope="row">
           <a routerLink="/movies/details/{{ movie.title }}">{{

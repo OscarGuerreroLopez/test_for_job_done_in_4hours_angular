@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   pageSelected = 1;
   searchMovie: string;
   movieTableSearch: MovieTable[] = [];
+  showSearch = true;
 
   constructor(
     private movies: MovieService,
@@ -47,10 +48,14 @@ export class HomeComponent implements OnInit {
     if (this.searchMovie) {
       count = this.searchMovie.length;
       this.movieTable.map(movie => {
-        if (movie.title.substring(0, count) === this.searchMovie) {
+        if (
+          movie.title.substring(0, count).toLocaleLowerCase() ===
+          this.searchMovie.toLocaleLowerCase()
+        ) {
           this.movieTableSearch.push(movie);
         }
       });
+
       return this.movieTableSearch.slice(
         pageIndex,
         pageIndex + this.moviesPerPage
@@ -73,5 +78,10 @@ export class HomeComponent implements OnInit {
 
   changePage(newPage: number) {
     this.pageSelected = newPage;
+    if (newPage !== 1) {
+      this.showSearch = false;
+    } else {
+      this.showSearch = true;
+    }
   }
 }
