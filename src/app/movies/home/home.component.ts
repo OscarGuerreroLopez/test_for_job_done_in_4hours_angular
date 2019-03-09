@@ -13,13 +13,18 @@ export class HomeComponent implements OnInit {
   error;
   showError = false;
   movieTable: MovieTable[] = [];
+  movieCount: number;
 
-  constructor(movies: MovieService, movieDetail: MovieDetailService) {
+  constructor(
+    private movies: MovieService,
+    private movieDetail: MovieDetailService
+  ) {
     movies.getMovies().subscribe(
       data => {
         this.loading = false;
         movieDetail.getMovies(data);
-        this.movieTable = movieDetail.showMoviesTable();
+        this.movieTable = movieDetail.getMoviesTable();
+        this.movieCount = this.movieDetail.getMoviesCount();
       },
       error => {
         this.error = error;

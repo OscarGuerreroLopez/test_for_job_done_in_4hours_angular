@@ -6,10 +6,12 @@ import { Movies, MoviesDetail } from "../model/interfaces";
 })
 export class MovieDetailService {
   movieArray: MoviesDetail[] = [];
+  movieCount: number;
 
   constructor() {}
 
   getMovies(movies: Movies) {
+    this.movieCount = movies.count;
     this.movieArray = movies.results
       .map(movie => {
         return {
@@ -41,7 +43,11 @@ export class MovieDetailService {
     return 0;
   }
 
-  showMoviesTable() {
+  getMoviesTable() {
     return this.movieArray;
+  }
+
+  getMoviesCount(): number {
+    return this.movieCount;
   }
 }

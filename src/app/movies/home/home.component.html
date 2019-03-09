@@ -13,9 +13,25 @@
 </div>
 
 <div *ngIf="showError" class="container text-center">
-  <h2>I was not able</h2>
+  <h2>I was not able to get the movies</h2>
 </div>
 
 <div *ngIf="!loading" class="container-fluid text-center">
-  <p *ngFor="let movie of movieTable">{{ movie.title }}</p>
+  <p>Click on the title to get more details</p>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Director</th>
+        <th scope="col">Release date:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movieTable">
+        <th scope="row">{{ movie.title }}</th>
+        <td>{{ movie.director }}</td>
+        <td>{{ movie.release_date | customDate }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
