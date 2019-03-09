@@ -16,8 +16,9 @@
   <h2>I was not able to get the movies</h2>
 </div>
 
-<div *ngIf="!loading" class="container-fluid text-center">
+<div *ngIf="!loading && !showError" class="container-fluid text-center">
   <p>Click on the title to get more details</p>
+
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -29,7 +30,9 @@
     <tbody>
       <tr *ngFor="let movie of displayMovies">
         <th scope="row" (click)="selectedMovie(movie.title)">
-          {{ movie.title }}
+          <a routerLink="/movies/details/{{ movie.title }}">{{
+            movie.title
+          }}</a>
         </th>
         <td>{{ movie.director }}</td>
         <td>{{ movie.release_date | customDate }}</td>
@@ -41,7 +44,7 @@
       *ngFor="let page of pageNumbers"
       (click)="changePage(page)"
       class="btn btn-outline-primary"
-      [class.active]="page == selectedPage"
+      [class.active]="page == pageSelected"
     >
       {{ page }}
     </button>

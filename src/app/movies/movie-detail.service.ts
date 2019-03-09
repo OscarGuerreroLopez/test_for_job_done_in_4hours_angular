@@ -46,4 +46,11 @@ export class MovieDetailService {
   getMoviesTable() {
     return this.movieArray;
   }
+
+  getMovieDetail(movie) {
+    const movieData = this.movieArray.find(film => {
+      return film.title === movie;
+    });
+    console.log(movieData);
+  }
 }
