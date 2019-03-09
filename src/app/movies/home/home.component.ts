@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MovieService } from "../../model/movie.service";
-import { Movies } from "../../model/interfaces";
-import { Observable } from "rxjs";
+import { MovieDetailService } from "../movie-detail.service";
+import { MovieTable } from "../../model/interfaces";
 
 @Component({
   selector: "app-home",
@@ -9,15 +9,24 @@ import { Observable } from "rxjs";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-  allMovies;
   loading: boolean;
+  error;
+  showError = false;
+  movieTable: MovieTable[] = [];
 
-  constructor(movies: MovieService) {
-    this.allMovies = movies.getMovies().subscribe(data => {
-      this.allMovies = data;
-      this.loading = false;
-      console.log(this.allMovies);
-    });
+  constructor(movies: MovieService, movieDetail: MovieDetailService) {
+    movies.getMovies().subscribe(
+      data => {
+        this.loading = false;
+        movieDetail.getMovies(data);
+        this.movieTable = movieDetail.showMoviesTable();
+      },
+      error => {
+        this.error = error;
+        this.showError = true;
+        this.loading = false;
+      }
+    );
   }
 
   ngOnInit() {

@@ -21,3 +21,9 @@ export interface MoviesDetail {
   edited?: string;
   url: string;
 }
+
+export interface MovieTable {
+  title: string;
+  director: string;
+  release_date?: string;
+}

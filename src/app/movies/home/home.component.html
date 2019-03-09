@@ -11,3 +11,11 @@
 <div *ngIf="loading" class="container text-center">
   <h2>Loading Movies........</h2>
 </div>
+
+<div *ngIf="showError" class="container text-center">
+  <h2>I was not able</h2>
+</div>
+
+<div *ngIf="!loading" class="container-fluid text-center">
+  <p *ngFor="let movie of movieTable">{{ movie.title }}</p>
+</div>
