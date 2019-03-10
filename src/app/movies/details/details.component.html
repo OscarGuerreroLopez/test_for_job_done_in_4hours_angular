@@ -1,12 +1,16 @@
-<div class="container-fluid text-center">
-  <div class="text-center">
-    <a routerLink="">Home</a>
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="float-left">
+      <h4><a routerLink="/movies">Back to movies</a></h4>
+    </div>
+
+    <div class="float-right">
+      <h4><a routerLink="">Home</a></h4>
+    </div>
   </div>
-  <div class="text-center">
-    <a routerLink="/movies">Movies</a>
-  </div>
+
   <div class="jumbotron text-center">
-    <h2>{{ movie }} details:</h2>
+    <h2>"{{ movie }}" details:</h2>
   </div>
 </div>
 
@@ -23,13 +27,13 @@
       <p>{{ opening_crawl }}</p>
     </div>
     <div class="col-sm  text-center">
-      Characters:
+      <p><b>Characters:</b></p>
       <div *ngIf="loading" class="text-center">
         <h4>Loading characters....</h4>
       </div>
       <div *ngIf="!loading" class="text-center">
         <p *ngFor="let actor of actors">
-          <b>{{ actor.name }}</b>
+          {{ actor.name }}
         </p>
       </div>
     </div>
