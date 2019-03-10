@@ -21,13 +21,13 @@ export class HomeComponent implements OnInit {
   showSearch = true;
 
   constructor(
-    private movies: MovieService, // Just gets the data from api
-    private movieDetail: MovieDetailService // process de data
+    private moviesService: MovieService, // Just gets the data from api
+    private movieDetailService: MovieDetailService // process de data
   ) {
-    movies.getMovies().subscribe(
+    moviesService.getMovies().subscribe(
       data => {
-        movieDetail.getMovies(data); // Here I process the data a create an ordered by name array
-        this.movieTable = movieDetail.getMoviesTable(); // Gets an array with the movie data ordered by name
+        movieDetailService.getMovies(data); // Here I process the data a create an ordered by name array
+        this.movieTable = movieDetailService.getMoviesTable(); // Gets an array with the movie data ordered by name
         this.loading = false; // Just shows the results when ready
       },
       error => {
@@ -48,13 +48,14 @@ export class HomeComponent implements OnInit {
     this.movieTableSearch = [];
 
     if (this.searchMovie) {
+      // the user typed somerthing in the search box
       count = this.searchMovie.length;
       this.movieTable.map(movie => {
         if (
           movie.title.substring(0, count).toLocaleLowerCase() ===
           this.searchMovie.toLocaleLowerCase()
         ) {
-          this.movieTableSearch.push(movie);
+          this.movieTableSearch.push(movie); // maybe better to use spread operator
         }
       });
 
@@ -63,10 +64,11 @@ export class HomeComponent implements OnInit {
         pageIndex + this.moviesPerPage
       );
     }
-
+    // if the user havent't used the search box then return the original array
     return this.movieTable.slice(pageIndex, pageIndex + this.moviesPerPage);
   }
 
+  // little trick to see how many buttons we need
   get pageNumbers(): number[] {
     if (this.searchMovie) {
       return Array(Math.ceil(this.movieTableSearch.length / this.moviesPerPage))
@@ -78,6 +80,7 @@ export class HomeComponent implements OnInit {
       .map((x, i) => i + 1);
   }
 
+  // force user to make the search from page 1
   changePage(newPage: number) {
     this.pageSelected = newPage;
     if (newPage !== 1) {

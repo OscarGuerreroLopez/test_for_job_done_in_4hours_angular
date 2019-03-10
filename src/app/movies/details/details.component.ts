@@ -33,6 +33,7 @@ export class DetailsComponent implements OnInit {
     this.getValues(this.movieDetail.getMovieDetail(this.movie));
   }
 
+  // there are better ways to do this but I am running out of time to try soemthing different, hope you can understand
   getValues(movieDetails: MoviesDetail) {
     this.opening_crawl = movieDetails.opening_crawl;
     this.director = movieDetails.director;

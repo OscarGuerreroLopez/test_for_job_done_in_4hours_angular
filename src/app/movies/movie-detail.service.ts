@@ -6,12 +6,12 @@ import { Movies, MoviesDetail } from "../model/interfaces";
 })
 export class MovieDetailService {
   movieArray: MoviesDetail[] = [];
-  movieCount: number;
 
   constructor() {}
 
+  // get what I need and short it
+
   getMovies(movies: Movies) {
-    this.movieCount = movies.count;
     this.movieArray = movies.results
       .map(movie => {
         return {
@@ -43,10 +43,13 @@ export class MovieDetailService {
     return 0;
   }
 
+  // returns a pretty array with just the information needed ans sorted by title
   getMoviesTable() {
     return this.movieArray;
   }
 
+  // get the information about a movie, since we have it on an array already works much faster than
+  // requesting the information from the server
   getMovieDetail(movie): MoviesDetail {
     const movieData = this.movieArray.find(film => {
       return film.title === movie;

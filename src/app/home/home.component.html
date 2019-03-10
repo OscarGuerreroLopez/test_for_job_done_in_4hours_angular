@@ -1,17 +1,44 @@
 <div class="container-fluid">
   <div class="container text-center">
-    <h4>Write a description here</h4>
+    <h4>Description:</h4>
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat
-      exercitationem necessitatibus corrupti quidem in vel, minima dolores ad
-      sed blanditiis sequi voluptatibus iure amet beatae ut cum earum qui?
-      Consequuntur.
+      For this exercise I used Angular 6 which is the one I have installed here.
+      I created a model module just to store some interfaces to used through the
+      movies component and also included a service to make the requests to the
+      api to get the movies. Normally I like to have services for the API
+      requests and services to process the data separately. Since this project
+      is small that’s why there is only one requests at the movie service. But
+      if there would be more then I would create several services depending on
+      the project and then just export them in the module.ts
     </p>
     <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab atque dolor
-      vel excepturi omnis ea ullam voluptatum! Eos culpa ullam alias velit?
-      Obcaecati veniam impedit minima ea odio qui dignissimos.
+      I also created a service call movie-details to order the data received
+      from the server. Here in a real world app I would do all the data
+      manipulations
     </p>
+    <p>
+      Some of the functionality of the movie component could be done in a
+      separate service but since I had no time I created different functions to
+      handle the view. I like to keep the components simple, just to handle the
+      views for example
+    </p>
+    <p>
+      For step 2, since all the information about the movies comes from the
+      first API call to https://swapi.co/api/films/ I decided not to make
+      additional calls to the server. In the real world of course I would
+      consult this with the right people, backend guys for example. But for this
+      project I couldn't ask anyone. Hope it is ok. At the next step I make more
+      requests to the server in case you wanted to see how I do them. I did not
+      used any libraries like axios for the requests, but it could be done. The
+      calls to the server to get the actors are done with forkJoin from rxjs to
+      return all data at once
+    </p>
+    <p>
+      Didn't do any unit testing due to the lack of time. Nor i tried to make it
+      really pretty, which of course can be done. Just some formatting with
+      bootstrap
+    </p>
+    <p>Please feel free to ask me any doubts or any suggestions</p>
   </div>
   <div class="text-center">
     <h3>Click on the link below to see the movies:</h3>
