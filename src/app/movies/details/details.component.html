@@ -27,6 +27,11 @@
       <div *ngIf="loading" class="text-center">
         <h4>Loading characters....</h4>
       </div>
+      <div *ngIf="!loading" class="text-center">
+        <p *ngFor="let actor of actors">
+          <b>{{ actor.name }}</b>
+        </p>
+      </div>
     </div>
   </div>
 </div>

@@ -17,6 +17,7 @@ export class DetailsComponent implements OnInit {
   release_date: string;
   characters: string[];
   loading = true;
+  actors: string[];
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.route.paramMap.subscribe(params => {
       this.movie = params.get("movie");
     });
@@ -40,11 +42,16 @@ export class DetailsComponent implements OnInit {
 
     this.characterService.loadPeople(this.characters).subscribe(
       data => {
-        console.log(data);
+        this.loadActors(data);
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  loadActors(data) {
+    this.actors = data;
+    this.loading = false;
   }
 }
