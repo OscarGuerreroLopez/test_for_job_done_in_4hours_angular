@@ -47,10 +47,11 @@ export class MovieDetailService {
     return this.movieArray;
   }
 
-  getMovieDetail(movie) {
+  getMovieDetail(movie): MoviesDetail {
     const movieData = this.movieArray.find(film => {
       return film.title === movie;
     });
-    console.log(movieData);
+
+    return movieData;
   }
 }

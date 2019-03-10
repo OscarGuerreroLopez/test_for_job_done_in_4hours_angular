@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 
 import { AppRoutingModule } from "../app-routing.module";
 import { MovieDetailService } from "./movie-detail.service";
+import { CharacterService } from "./character.service";
 import { MoviesRoutingModule } from "./movies-routing.module";
 import { FormsModule } from "@angular/forms";
 import { ModelModule } from "../model/model.module";
@@ -20,6 +21,6 @@ import { DetailsComponent } from "./details/details.component";
     MoviesRoutingModule,
     FormsModule
   ],
-  providers: [MovieDetailService]
+  providers: [MovieDetailService, CharacterService]
 })
 export class MoviesModule {}

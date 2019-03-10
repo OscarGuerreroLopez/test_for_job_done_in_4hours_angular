@@ -9,6 +9,7 @@ import { Movies } from "./interfaces";
 })
 export class MovieService {
   moviesUrl: string;
+
   constructor(private http: HttpClient) {
     this.moviesUrl = "https://swapi.co/api/films/";
   }

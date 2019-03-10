@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MovieService } from "../../model/movie.service";
 import { MovieDetailService } from "../movie-detail.service";
+
 import { MovieTable } from "../../model/interfaces";
 
 @Component({
@@ -20,14 +21,14 @@ export class HomeComponent implements OnInit {
   showSearch = true;
 
   constructor(
-    private movies: MovieService,
-    private movieDetail: MovieDetailService
+    private movies: MovieService, // Just gets the data from api
+    private movieDetail: MovieDetailService // process de data
   ) {
     movies.getMovies().subscribe(
       data => {
-        movieDetail.getMovies(data);
-        this.movieTable = movieDetail.getMoviesTable();
-        this.loading = false;
+        movieDetail.getMovies(data); // Here I process the data a create an ordered by name array
+        this.movieTable = movieDetail.getMoviesTable(); // Gets an array with the movie data ordered by name
+        this.loading = false; // Just shows the results when ready
       },
       error => {
         this.loading = false;
@@ -38,13 +39,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loading = true;
+    this.loading = true; // Show loading page until I get data from the API
   }
 
   get displayMovies() {
     let count = 0;
     const pageIndex = (this.pageSelected - 1) * this.moviesPerPage;
     this.movieTableSearch = [];
+
     if (this.searchMovie) {
       count = this.searchMovie.length;
       this.movieTable.map(movie => {
